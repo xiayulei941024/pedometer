@@ -6,15 +6,14 @@ import 'dart:io' show Platform;
 const int _stopped = 0, _walking = 1;
 
 class Pedometer {
-  static init() {
+  static init() async {
     MethodChannel methodChannel = MethodChannel('setup');
 
-    methodChannel.invokeMethod('init');
-    _stepDetectionChannel =
-    const EventChannel('step_detection');
-    _stepCountChannel =
-    const EventChannel('step_count');
+    await methodChannel.invokeMethod('init');
+    _stepDetectionChannel = const EventChannel('step_detection');
+    _stepCountChannel = const EventChannel('step_count');
   }
+
   static late EventChannel _stepDetectionChannel;
   static late EventChannel _stepCountChannel;
 
