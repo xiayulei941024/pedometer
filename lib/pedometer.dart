@@ -7,9 +7,11 @@ const int _stopped = 0, _walking = 1;
 
 class Pedometer {
   static init() async {
-    MethodChannel methodChannel = MethodChannel('setup');
+    if (Platform.isAndroid) {
+      MethodChannel methodChannel = MethodChannel('setup');
 
-    await methodChannel.invokeMethod('init');
+      await methodChannel.invokeMethod('init');
+    }
     _stepDetectionChannel = const EventChannel('step_detection');
     _stepCountChannel = const EventChannel('step_count');
   }
